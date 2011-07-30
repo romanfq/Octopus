@@ -8,8 +8,8 @@
     <ProjectGuid>{18572044-39DF-4327-8919-0AF09C9111B9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OctopusServerLib</RootNamespace>
-    <AssemblyName>OctopusServerLib</AssemblyName>
+    <RootNamespace>Octopus.ServerLib</RootNamespace>
+    <AssemblyName>Octopus.ServerLib</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,6 +31,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac">
+      <HintPath>..\packages\Autofac.2.5.1.827\lib\NET40\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Configuration">
+      <HintPath>..\packages\Autofac.2.5.1.827\lib\NET40\Autofac.Configuration.dll</HintPath>
+    </Reference>
     <Reference Include="clrzmq">
       <HintPath>..\OctopusServer\packages\clrzmq2.2.0.10.2010112000\lib\clrzmq.dll</HintPath>
     </Reference>
@@ -46,6 +52,7 @@
   <ItemGroup>
     <Compile Include="Messages\Ping.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Wire.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

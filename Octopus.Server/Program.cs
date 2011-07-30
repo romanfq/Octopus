@@ -5,6 +5,7 @@ using System.Text;
 using System.Runtime.Serialization;
 using OctopusServerLib.Messages;
 using System.IO;
+using Octopus.ServerLib;
 
 namespace OctopusServer
 {
@@ -13,13 +14,14 @@ namespace OctopusServer
         static void Main(string[] args)
         {
             DataContractSerializer serializer;
-            MemoryStream ms;
+
+            InitSerializers();
 
             using (ZMQ.Context context = new ZMQ.Context(1))
             {
                 using (ZMQ.Socket socket = context.Socket(ZMQ.SocketType.REP))
                 {
-                    socket.Bind("tcp://*.5555");
+                    socket.Bind("tcp://*:5555");
                     Console.WriteLine("Running server on port 5555");
 
                     while (true)
@@ -27,21 +29,29 @@ namespace OctopusServer
                         byte[] clientMessage = socket.Recv();
                         Console.WriteLine("Received {0} bytes", clientMessage.Length);
 
-                        ms = new MemoryStream(clientMessage);
-                        serializers.TryGetValue(typeof(Ping), out serializer);
-                        Ping pingMessage = (Ping) serializer.ReadObject(ms);
-                        Console.WriteLine("from client...'{0}'", pingMessage.ClientId);
+                        var ping = Wire.Deserialize<Ping>(clientMessage);
+                        Console.WriteLine("From client: {0}", ping.ClientId);
 
-                        PingAck ack = new PingAck();
-                        serializers.TryGetValue(typeof(PingAck), out serializer);
-                        ms = new MemoryStream();
-                        serializer.WriteObject(ms, ack);
-                        socket.Send(ms.GetBuffer());
+                        PingAck ack = new PingAck { TimeStamp = DateTime.UtcNow };
+                        socket.Send(Wire.Serialize(ack));
                     }
                 }
             }
         }
 
-        static Dictionary<Type, DataContractSerializer> serializers = new Dictionary<Type, DataContractSerializer>();
+        private static void InitSerializers()
+        {
+            serializers = new[] 
+            { 
+                typeof(Ping), 
+                typeof(PingAck) 
+            }.ToDictionary(type => type, type => new DataContractSerializer(type));
+           
+        }
+
+        static Dictionary<Type, DataContractSerializer> serializers;
+
+        
+
     }
 }

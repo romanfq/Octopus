@@ -9,11 +9,14 @@ namespace OctopusServerLib.Messages
     [DataContract]
     public class Ping
     {
+        [DataMember]
         public Guid ClientId { get; set; }
     }
 
     [DataContract]
     public class PingAck
     {
+        [DataMember]
+        public DateTime TimeStamp { get; set; }
     }
 }
