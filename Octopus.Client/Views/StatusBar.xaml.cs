@@ -11,20 +11,22 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Octopus.Proxies.Services;
-using OctopusServerLib.Messages;
-using System.Threading.Tasks;
+using Autofac;
+using Octopus.Client.Configuration.Autofac;
 
-namespace OctopusClient
+namespace Octopus.Client.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for StatusBar.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class StatusBar : UserControl
     {
-        public MainWindow()
+        public StatusBar()
         {
             InitializeComponent();
+
+            OctopusClient.App app = (OctopusClient.App) Application.Current;
+            DataContext = app.Container.Resolve<ViewModel.StatusBarViewModel>();
         }
     }
 }

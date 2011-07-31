@@ -11,18 +11,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Octopus.Proxies.Services;
-using OctopusServerLib.Messages;
-using System.Threading.Tasks;
 
-namespace OctopusClient
+namespace Octopus.Client.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for MainPane.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainPane : UserControl
     {
-        public MainWindow()
+        public MainPane()
         {
             InitializeComponent();
         }

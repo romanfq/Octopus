@@ -1,22 +1,11 @@
 ﻿<Window x:Class="OctopusClient.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:v="clr-namespace:Octopus.Client.Views"
         Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="126*" />
-            <ColumnDefinition Width="377*" />
-        </Grid.ColumnDefinitions>
-        <Button Content="Ping" MaxWidth="100" MaxHeight="75" Click="Button_Click" />
-        <Border Grid.Column="1" BorderBrush="Red" BorderThickness="2" Height="75">
-            <Border.Margin>
-                <Thickness Left="25" Right="25" />
-            </Border.Margin>
-            <TextBlock Text="&lt;reply will appear here&gt;" 
-                       VerticalAlignment="Center" 
-                       HorizontalAlignment="Center"
-                       TextWrapping="Wrap"
-                       x:Name="PingReplyTextBlock" />
-        </Border>
-    </Grid>
+    <DockPanel>
+        <v:ToolBar DockPanel.Dock="Top" Height="75"/>
+        <v:StatusBar DockPanel.Dock="Bottom" Height="30" />
+        <v:MainPane />
+    </DockPanel>
 </Window>

@@ -8,6 +8,8 @@ namespace Octopus.Proxies
 {
     public interface IProxy<TInput, TResult>
     {
+        void Connect();
         Task<TResult> Request(TInput input);
+        void Disconnect();
     }
 }

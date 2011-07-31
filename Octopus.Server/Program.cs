@@ -6,6 +6,7 @@ using System.Runtime.Serialization;
 using OctopusServerLib.Messages;
 using System.IO;
 using Octopus.ServerLib;
+using System.Threading;
 
 namespace OctopusServer
 {
@@ -13,10 +14,6 @@ namespace OctopusServer
     {
         static void Main(string[] args)
         {
-            DataContractSerializer serializer;
-
-            InitSerializers();
-
             using (ZMQ.Context context = new ZMQ.Context(1))
             {
                 using (ZMQ.Socket socket = context.Socket(ZMQ.SocketType.REP))
@@ -32,26 +29,13 @@ namespace OctopusServer
                         var ping = Wire.Deserialize<Ping>(clientMessage);
                         Console.WriteLine("From client: {0}", ping.ClientId);
 
+                        Thread.Sleep(5000);
+
                         PingAck ack = new PingAck { TimeStamp = DateTime.UtcNow };
                         socket.Send(Wire.Serialize(ack));
                     }
                 }
             }
         }
-
-        private static void InitSerializers()
-        {
-            serializers = new[] 
-            { 
-                typeof(Ping), 
-                typeof(PingAck) 
-            }.ToDictionary(type => type, type => new DataContractSerializer(type));
-           
-        }
-
-        static Dictionary<Type, DataContractSerializer> serializers;
-
-        
-
     }
 }

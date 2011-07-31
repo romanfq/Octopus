@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="Octopus.Client.Views.StatusBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:v="clr-namespace:Octopus.Client.ViewModel"
+             mc:Ignorable="d" 
+             d:DesignHeight="30" d:DesignWidth="448"
+             v:ViewLoadedAdvisor.ViewModel="{Binding}">
+    <DockPanel>
+        <TextBlock Text="&lt;Status&gt;" VerticalAlignment="Center" DockPanel.Dock="Right">
+            <TextBlock.Margin>
+                <Thickness Right="5" Left="2.5"/>
+            </TextBlock.Margin>
+        </TextBlock>
+        <TextBlock Text="{Binding StatusText}" VerticalAlignment="Center">
+            <TextBlock.Margin>
+                <Thickness Right="2.5" Left="5"/>
+            </TextBlock.Margin>
+        </TextBlock>
+    </DockPanel>
+</UserControl>

@@ -50,6 +50,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\ProxyException.cs" />
+    <Compile Include="IProxyConfiguration.cs" />
+    <Compile Include="ProxyBase.cs" />
+    <Compile Include="ProxyConfiguration.cs" />
     <Compile Include="Services\IPingService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IProxy.cs" />
